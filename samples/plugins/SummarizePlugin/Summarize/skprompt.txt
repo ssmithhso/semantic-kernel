@@ -18,6 +18,6 @@ Hello how are you?
 +++++
 Hello
 
-Summarize this
+In the style of {{$style}} Summarize this
 {{$input}}
 +++++

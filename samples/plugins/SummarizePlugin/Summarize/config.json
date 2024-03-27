@@ -16,6 +16,12 @@
       "description": "Text to summarize",
       "default": "",
       "is_required": true
+    },
+    {
+      "name": "style",
+      "description": "The writing style that should be used to summarise",
+      "default": "",
+      "is_required": true
     }
   ]
 }
