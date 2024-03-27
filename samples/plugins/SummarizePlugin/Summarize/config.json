@@ -20,8 +20,8 @@
     {
       "name": "style",
       "description": "The writing style that should be used to summarise",
-      "default": "",
-      "is_required": true
+      "default": "formal",
+      "is_required": false
     }
   ]
 }
