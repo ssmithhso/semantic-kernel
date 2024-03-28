@@ -9,23 +9,22 @@ from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion
 from semantic_kernel.connectors.search_engine import BingConnector
 from semantic_kernel.core_plugins import WebSearchEnginePlugin
 
-load_dotenv()
-
 
 async def main():
+
     kernel = sk.Kernel()
-    deployment, key, endpoint, api_version = sk.azure_openai_settings_from_dot_env(include_api_version=True)
+    # deployment, key, endpoint, api_version = sk.azure_openai_settings_from_dot_env(include_api_version=True)
     service_id = "chat-gpt"
     kernel.add_service(
         AzureChatCompletion(
-            service_id=service_id,
-            deployment_name=deployment,
-            api_key=key,
-            endpoint=endpoint,
-            api_version=api_version,
+            service_id="chat-gpt",
+            deployment_name="hso_gpt4",
+            api_key="bb6ecad7708346f28bfee99a8fa096ec",
+            endpoint="https://hso-openai-gpt4.openai.azure.com/",
+            api_version="2024-02-15-preview",
         ),
     )
-    connector = BingConnector(api_key=os.getenv("BING_API_KEY"))
+    connector = BingConnector(api_key="281113fcc16943b7b121b0c42e1fc0bb")
     web_plugin = kernel.import_plugin_from_object(WebSearchEnginePlugin(connector), "WebSearch")
 
     print("---------------- Question 1 -----------------\n")
@@ -56,8 +55,10 @@ async def main():
         execution_settings=req_settings,
     )
 
-    question = "What is Semantic Kernel?"
-    qna = kernel.create_function_from_prompt(prompt_template_config=prompt_template_config)
+    question = "Who is the prrsident of th e us?"
+    qna = kernel.create_function_from_prompt(
+        function_name="seacrh", plugin_name="search", prompt_template_config=prompt_template_config
+    )
     result = await qna.invoke(kernel, question=question, num_results=10, offset=0)
 
     print(f"Question: {question}\n")

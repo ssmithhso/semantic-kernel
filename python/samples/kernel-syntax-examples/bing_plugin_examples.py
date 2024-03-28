@@ -14,23 +14,23 @@ load_dotenv()
 
 async def main():
     kernel = sk.Kernel()
-    deployment, key, endpoint, api_version = sk.azure_openai_settings_from_dot_env(include_api_version=True)
+    # deployment, key, endpoint, api_version = sk.azure_openai_settings_from_dot_env(include_api_version=True)
     service_id = "chat-gpt"
     kernel.add_service(
         AzureChatCompletion(
             service_id=service_id,
-            deployment_name=deployment,
-            api_key=key,
-            endpoint=endpoint,
-            api_version=api_version,
+            deployment_name="hso_gpt4",
+            api_key="bb6ecad7708346f28bfee99a8fa096ec",
+            endpoint="https://hso-openai-gpt4.openai.azure.com/",
+            api_version="2024-02-15-preview",
         ),
     )
-    connector = BingConnector(api_key=os.getenv("BING_API_KEY"))
+    connector = BingConnector(api_key="281113fcc16943b7b121b0c42e1fc0bb")
     web_plugin = kernel.import_plugin_from_object(WebSearchEnginePlugin(connector), "WebSearch")
 
     print("---------------- Question 1 -----------------\n")
 
-    query = "Which country receives the most rain per year?"
+    query = "Who is the president of the US?"
     search = web_plugin["search"]
     result = await kernel.invoke(search, query=query)
     print(f"Question: {query}\n")
@@ -41,7 +41,7 @@ async def main():
     prompt = """
     Answer the question using only the data that is provided in the data section.
     Do not use any prior knowledge to answer the question.
-    Data: {{WebSearch.search "What is semantic kernel?"}}
+    Data: {{WebSearch.search "Who is the president of the US"}}
     Question: {{$question}}?
     Answer:
     """
