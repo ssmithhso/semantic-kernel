@@ -45,7 +45,7 @@ req_settings = AzureChatPromptExecutionSettings(service_id="chat-gpt", extra_bod
 
 chat_service = sk_oai.AzureChatCompletion(
     service_id="chat-gpt",
-    deployment_name="gpt-35-turbo-16k",
+    deployment_name=deployment,
     api_key=api_key,
     endpoint=endpoint,
     api_version="2023-12-01-preview",

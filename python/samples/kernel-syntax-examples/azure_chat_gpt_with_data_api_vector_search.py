@@ -44,7 +44,7 @@ azure_ai_search_settings["fieldsMapping"] = {
 # Add Ada embedding deployment name to the settings and use vector search.
 azure_ai_search_settings["embeddingDependency"] = {
     "type": "DeploymentName",
-    "deploymentName": "ada-002",
+    "deploymentName": "text-ada-002",
 }
 azure_ai_search_settings["queryType"] = "vector"
 
